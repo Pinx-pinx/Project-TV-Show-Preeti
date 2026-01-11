@@ -47,3 +47,38 @@ function searchEpisodes(searchTerm) {
 
   renderEpisodes(filteredEpisodes);
 }
+
+searchInput.addEventListener("input", (event) => {
+  const searchTerm = event.target.value;
+
+  if (searchTerm === "") {
+    matchCount.textContent = `Displaying ${allEpisodes.length}/${allEpisodes.length} episodes`;
+    renderEpisodes(allEpisodes);
+  } else {
+    searchEpisodes(searchTerm);
+  }
+});
+
+const episodeSelector = document.getElementById("episode-selector");
+allEpisodes.forEach((episode) => {
+  const option = document.createElement("option");
+  option.value = formatEpisodeCode(episode.season, episode.number);
+  option.textContent = `${option.value} - ${episode.name}`;
+  episodeSelector.appendChild(option);
+});
+
+episodeSelector.addEventListener("change", (event) => {
+  const selectedEpisodeCode = event.target.value;
+
+  if (selectedEpisodeCode) {
+    const selectedEpisodeDiv = Array.from(root.children).find((child) => {
+      return child
+        .querySelector("h2")
+        .textContent.includes(selectedEpisodeCode);
+    });
+
+    if (selectedEpisodeDiv) {
+      selectedEpisodeDiv.scrollIntoView({ behavior: "smooth" });
+    }
+  }
+});
