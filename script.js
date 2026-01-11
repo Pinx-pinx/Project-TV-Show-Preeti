@@ -42,3 +42,19 @@ function searchEpisodes(searchTerm) {
       filteredEpisodes.push(episode);
     }
   });
+}
+const searchInput = document.getElementById("search-input");
+const matchCount = document.getElementById("match-count");
+
+function searchEpisodes(searchTerm) {
+  const filteredEpisodes = [];
+
+  allEpisodes.forEach((episode) => {
+    if (
+      episode.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      episode.summary.toLowerCase().includes(searchTerm.toLowerCase())
+    ) {
+      filteredEpisodes.push(episode);
+    }
+  });
+}
