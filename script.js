@@ -52,9 +52,9 @@ function fetchShows() {
     });
 }
 function populateShowSelector(shows) {
-  showSelector.innerHTML = "<option value=''>Select a show</option>"; // Reset the dropdown
+  showSelector.innerHTML = "<option value=''>Select a show</option>";
   shows
-    .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())) // Sort alphabetically
+    .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()))
     .forEach((show) => {
       const option = document.createElement("option");
       option.value = show.id;
@@ -63,7 +63,14 @@ function populateShowSelector(shows) {
     });
 }
 
-// Fetch episodes for a specific show
+showSelector.addEventListener("change", (event) => {
+  const selectedShowId = event.target.value;
+
+  if (selectedShowId) {
+    fetchEpisodesForShow(selectedShowId);
+  }
+});
+
 function fetchEpisodesForShow(showId) {
   statusMessage.textContent = "Loading episodes...";
 
