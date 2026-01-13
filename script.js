@@ -51,6 +51,17 @@ function fetchShows() {
         "Sorry, something went wrong while loading TV shows.";
     });
 }
+function populateShowSelector(shows) {
+  showSelector.innerHTML = "<option value=''>Select a show</option>"; // Reset the dropdown
+  shows
+    .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase())) // Sort alphabetically
+    .forEach((show) => {
+      const option = document.createElement("option");
+      option.value = show.id;
+      option.textContent = show.name;
+      showSelector.appendChild(option);
+    });
+}
 
 /* Helpers */
 
