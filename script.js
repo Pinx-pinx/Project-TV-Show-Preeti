@@ -185,4 +185,4 @@ episodeSelector.addEventListener("change", (event) => {
 
 /*  Start App */
 
-fetchEpisodes();
+fetchShows();
