@@ -3,6 +3,8 @@ const searchInput = document.getElementById("search-input");
 const matchCount = document.getElementById("match-count");
 const episodeSelector = document.getElementById("episode-selector");
 const statusMessage = document.getElementById("status-message");
+const showSelector = document.getElementById("show-selector"); // Add this line
+let allShows = [];
 
 let allEpisodes = [];
 
@@ -32,6 +34,24 @@ function fetchEpisodes() {
     });
 }
 
+function fetchShows() {
+  fetch("https://api.tvmaze.com/shows")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to load TV shows");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      allShows = data;
+      populateShowSelector(allShows);
+    })
+    .catch(() => {
+      statusMessage.textContent =
+        "Sorry, something went wrong while loading TV shows.";
+    });
+}
+
 /* Helpers */
 
 function formatEpisodeCode(season, number) {
@@ -57,10 +77,7 @@ function renderEpisodes(episodes) {
 
     episodeDiv.innerHTML = `
       <h2>
-        ${episode.name} (${formatEpisodeCode(
-          episode.season,
-          episode.number
-        )})
+        ${episode.name} (${formatEpisodeCode(episode.season, episode.number)})
       </h2>
       
       <img src="${episode.image.medium}" alt="${episode.name}">
@@ -115,8 +132,7 @@ episodeSelector.addEventListener("change", (event) => {
   const selectedEpisodeCode = event.target.value;
 
   if (selectedEpisodeCode) {
-    const selectedEpisodeDiv =
-      document.getElementById(selectedEpisodeCode);
+    const selectedEpisodeDiv = document.getElementById(selectedEpisodeCode);
 
     if (selectedEpisodeDiv) {
       selectedEpisodeDiv.scrollIntoView({ behavior: "smooth" });
