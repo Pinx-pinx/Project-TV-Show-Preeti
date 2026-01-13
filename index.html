@@ -4,23 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TV Show Project | Preeti Tyagi (preeti-t)</title>
+
     <link href="style.css" rel="stylesheet" />
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
   <body>
+    <!-- Top Controls -->
     <div id="top-bar">
-      <input type="text" id="search-input" placeholder="Search episodes..." />
+      <input
+        type="text"
+        id="search-input"
+        placeholder="Search episodes..."
+      />
+
       <p id="match-count"></p>
 
       <select id="episode-selector">
         <option value="">Select an episode</option>
       </select>
     </div>
+
+    <!-- Status messages (loading / error) -->
+    <p id="status-message"></p>
+
+    <!-- Episodes -->
     <div id="root">
-      <!-- Episodes will be rendered here by script.js -->
+      <!-- Episodes rendered here -->
     </div>
 
+    <!-- Footer -->
     <footer>
       <p>
         Data originally from
@@ -34,10 +47,8 @@
       </p>
     </footer>
 
-    <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
-    <script src="episodes.js"></script>
-
-    <!-- Loads YOUR javascript code -->
+    <!-- Main Script -->
     <script src="script.js"></script>
   </body>
 </html>
+
