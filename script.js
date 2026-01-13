@@ -124,9 +124,7 @@ function renderEpisodes(episodes) {
       </h2>
       
       <img src="${episode.image.medium}" alt="${episode.name}">
-      <p>Season: ${episode.season}</p>
-      <p>Episode: ${episode.number}</p>
-      <div>${episode.summary}</div>
+      <div>${episode.summary}</div> <!-- Display the summary directly -->
     `;
 
     root.appendChild(episodeDiv);
