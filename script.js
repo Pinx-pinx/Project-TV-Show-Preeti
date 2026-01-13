@@ -63,6 +63,31 @@ function populateShowSelector(shows) {
     });
 }
 
+// Fetch episodes for a specific show
+function fetchEpisodesForShow(showId) {
+  statusMessage.textContent = "Loading episodes...";
+
+  fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to load episode data");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      allEpisodes = data;
+      statusMessage.textContent = "";
+
+      renderEpisodes(allEpisodes);
+      populateEpisodeSelector(allEpisodes);
+      updateMatchCount(allEpisodes.length, allEpisodes.length);
+    })
+    .catch(() => {
+      statusMessage.textContent =
+        "Sorry, something went wrong while loading episodes. Please try again later.";
+    });
+}
+
 /* Helpers */
 
 function formatEpisodeCode(season, number) {
