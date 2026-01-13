@@ -161,6 +161,7 @@ searchInput.addEventListener("input", (event) => {
 /* Episode Selector */
 
 function populateEpisodeSelector(episodes) {
+  episodeSelector.innerHTML = "<option value=''>Select an episode</option>";
   episodes.forEach((episode) => {
     const option = document.createElement("option");
     const episodeCode = formatEpisodeCode(episode.season, episode.number);
